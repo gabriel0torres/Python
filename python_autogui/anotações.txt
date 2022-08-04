@@ -1,0 +1,16 @@
+#Necessário para programar as automações:
+    1. python
+    2. editor de texto com um runner de python
+
+#link para documentação do pyautogui:
+    https://pyautogui.readthedocs.io/en/latest/
+
+#para instalar o pyautogui:
+    pip install pyautogui
+
+#para instalar o executável:
+    primeiro instalar pyinstaller utilizando o comando: pip install pyinstaller
+
+#para transformar um arquivo em executavel:
+    pyinstaller --onefile -w testes/python/arquivo.py (atentar-se ao diretório do arquivo)
+    o arquivo executável é gerado dentro da pasta dist
