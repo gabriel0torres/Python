@@ -1,6 +1,6 @@
 #Necessário para programar as automações:
     1. python
-    2. editor de texto com um runner de python
+    2. editor de texto com um compilador de python
 
 #link para documentação do pyautogui:
     https://pyautogui.readthedocs.io/en/latest/
