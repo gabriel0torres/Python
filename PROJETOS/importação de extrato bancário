@@ -1,0 +1,35 @@
+import pandas as pd
+import pyodbc
+import os
+import xlrd
+
+# Some other example server values are
+# server = 'localhost\sqlexpress' # for a named instance
+# server = 'myserver,port' # to specify an alternate port
+server = '' 
+database = '' 
+username = '' 
+password = '' 
+cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
+cursor.execute("DELETE ")
+cnxn.commit()
+
+folder = r"C:\"
+folder2 = 'C:/'
+
+for file_name in os.listdir(folder):
+    dir = folder2 + file_name
+    arquivo = pd.read_excel(dir, skiprows=2)
+    arquivo = arquivo.rename(columns={'Data':'DATA',
+                                  'Unnamed: 1':'COLUNA_VAZIA',
+                                  'Histórico':'HISTORICO',
+                                  'Documento':'DOCUMENTO',
+                                  'Valor (R$)':'VALOR',
+                                  'Saldo (R$)':'SALDO'})
+    arquivo = arquivo.fillna(0)
+    # Insert Dataframe into SQL Server:
+    for index, row in arquivo.iterrows():
+        cursor.execute("INSERT INTO BANCO.dbo.tbl_import_extrato () values(?)", row.DATA, row.HISTORICO , row.DOCUMENTO, row.VALOR, row.SALDO )
+        cnxn.commit()
+cursor.close()
