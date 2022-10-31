@@ -1,0 +1,66 @@
+import pandas as pd
+import pyodbc
+import os
+import shutil
+from webbrowser import Chrome
+from selenium import webdriver 
+from time import sleep
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from subprocess import CREATE_NO_WINDOW
+
+pasta = "downloadarquivo"
+dir = "C:/"
+if os.path.exists(r"C:\"):
+    shutil.rmtree(os.path.join(dir, pasta))
+
+download_dir = r"C:\"
+
+opt = webdriver.ChromeOptions()
+opt.add_argument("--headless")
+opt.add_experimental_option('prefs', {
+    #"plugins.plugins_list": [{"enabled":False,"name":"Chrome PDF Viewer"}],
+    "download": {
+    "prompt_for_download": False,
+    "default_directory"  : download_dir
+            }
+        })
+
+services = Service(ChromeDriverManager().install())
+services.creationflags = CREATE_NO_WINDOW
+
+navegador = webdriver.Chrome(service=services,options=opt)
+navegador.maximize_window()
+navegador.get("https://integrator-dot-autoavaliar-integrador-224612.rj.r.appspot.com/viamar/reports?token=88bdd0b-073c-4490-823d-031fee88a5fc")
+
+sleep(5)
+
+folder = r"C:\diretorio\\"
+
+for file_name in os.listdir(folder):
+    old_name = folder + file_name
+    new_name = folder + 'arquivo.csv'
+    os.rename(old_name, new_name)
+
+#pega o arquivo com o pandas
+arquivo = pd.read_csv('C:/', sep=';')
+arquivo = arquivo.fillna(0)
+
+# server = 'localhost\sqlexpress' # for a named instance
+# server = 'myserver,port' # to specify an alternate port
+server = '' 
+database = '' 
+username = '' 
+password = '' 
+cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
+
+# Inserir o dataframe para o SQL Server:
+cursor.execute("DELETE FROM  ")
+for index, row in arquivo.iterrows():
+    cursor.execute("INSERT INTO  () values(?)", row.coluna)
+cnxn.commit()
+cursor.close()
+navegador.close()
+
+os._exit(0)
