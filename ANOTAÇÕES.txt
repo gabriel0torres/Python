@@ -1,0 +1,75 @@
+ANOTAÇÕES SELENIUM
+
+#IMPORTANTE!!!!
+    para clicar em elementos na tela, voce deve utilizar um dos dois passos a seguir:
+
+    1.sempre que abrir uma nova guia de navegador, certificar-se de que ela está em tela cheia, utilizando
+    este código: navegador.maximize_window()
+
+    2. gravar o xpath em uma variável chamada button, e depois executar o seguinte código:
+    navegador.execute_script("arguments[0].click();", button)
+
+    Não pode ter barra de cookies ou qualquer outro elemento atrapalhando.
+
+
+#baixar o webdriver e colar onde o python está instalado
+
+#saber o diretório onde seu python está instalado, rodar o seguinte código:
+    import os
+    import sys
+    print(os.path.dirname(sys.executable))
+
+#instalar o selenium:
+    pip install selenium
+
+#manual comandos selenium com python:
+    https://selenium-python.readthedocs.io/
+
+#instalar o chromedrive direto na máquina do usuário
+    pip install webdriver-manager
+    from selenium import webdriver
+    from webdriver_manager.chrome import ChromeDriverManager
+
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+---------------------------------------------------------------------------------------
+
+ANOTAÇÕES PYAUTOGUI
+
+#Necessário para programar as automações:
+    1. python
+    2. editor de texto com um runner de python
+
+#link para documentação do pyautogui:
+    https://pyautogui.readthedocs.io/en/latest/
+
+#para instalar o pyautogui:
+    pip install pyautogui
+
+#para instalar o executável:
+    primeiro instalar pyinstaller utilizando o comando: pip install pyinstaller
+
+#para transformar um arquivo em executavel:
+    pyinstaller --onefile -w testes/python/arquivo.py (atentar-se ao diretório do arquivo)
+    o arquivo executável é gerado dentro da pasta dist
+
+---------------------------------------------------------------------------------------
+
+ANOTAÇÕES DJANGO
+
+#Necessário para programar as automações:
+    1. python
+    2. editor de texto com um runner de python
+
+#link para documentação do pyautogui:
+    https://pyautogui.readthedocs.io/en/latest/
+
+#para instalar o pyautogui:
+    pip install pyautogui
+
+#para instalar o executável:
+    primeiro instalar pyinstaller utilizando o comando: pip install pyinstaller
+
+#para transformar um arquivo em executavel:
+    pyinstaller --onefile -w testes/python/arquivo.py (atentar-se ao diretório do arquivo)
+    o arquivo executável é gerado dentro da pasta dist
